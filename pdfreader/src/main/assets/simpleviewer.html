@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<!--
+Copyright 2014 Mozilla Foundation
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<html dir="ltr" mozdisallowselectionprint moznomarginboxes>
+<head>
+  <meta charset="utf-8">
+  <meta name="google" content="notranslate">
+  <title>PDF.js viewer using built components</title>
+
+  <style>
+    body {
+      background-color: #808080;
+      margin: 0;
+      padding: 0;
+    }
+    #viewerContainer {
+      overflow: auto;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+
+  <link rel="stylesheet" href="file:///android_asset/pdf_viewer.css">
+
+  <!--&lt;!&ndash; for legacy browsers &ndash;&gt;-->
+  <!--<script src="../../build/dist/web/compatibility.js"></script>-->
+
+  <script src="file:///android_asset/pdf.js"></script>
+  <script src="file:///android_asset/pdf_viewer.js"></script>
+</head>
+
+<body tabindex="1">
+  <div id="viewerContainer">
+    <div id="viewer" class="pdfViewer"></div>
+  </div>
+
+  <script src="simpleviewer.js"></script>
+
+  <script>
+    function getParameterByName(name, url) {
+      if (!url) {
+        url = window.location.href;
+      }
+      name = name.replace(/[\[\]]/g, "\\$&");
+      var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+    var documentUrl = getParameterByName('url');
+
+    // Loading document.
+    var DEFAULT_URL = 'http://xingshijie.github.io/doc/testpdf.pdf';
+
+    if(!documentUrl){
+        documentUrl = DEFAULT_URL;
+    }
+
+    PDFJS.getDocument(documentUrl).then(function (pdfDocument) {
+      // Document loaded, specifying document for the viewer and
+      // the (optional) linkService.
+      pdfViewer.setDocument(pdfDocument);
+
+      pdfLinkService.setDocument(pdfDocument, null);
+    });
+  </script>
+</body>
+</html>
