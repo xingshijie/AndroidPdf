@@ -15,6 +15,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         PdfView pdfView = (PdfView) findViewById(R.id.pdf_view);
-        pdfView.loadFromFile("http://xingshijie.github.io/doc/testpdf.pdf");
+        pdfView.loadFromFile(new File("/storage/emulated/0/Download/testpdf.pdf"));
     }
 }

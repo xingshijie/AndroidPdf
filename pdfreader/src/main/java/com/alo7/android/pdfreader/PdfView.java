@@ -35,19 +35,21 @@ public class PdfView extends FrameLayout {
         webSettings.setSupportZoom(true);
         webSettings.setBuiltInZoomControls(true);
         webSettings.setJavaScriptEnabled(true);
-//        webSettings.setAllowFileAccessFromFileURLs(true);
-//        webSettings.setAllowUniversalAccessFromFileURLs(true);
+        webSettings.setAllowFileAccessFromFileURLs(true);
+        webSettings.setAllowUniversalAccessFromFileURLs(true);
         webView.getSettings().setLoadsImagesAutomatically(true);
     }
 
-    public void loadFromFile(String path){
-//        if(path != null){
-//            webView.loadUrl("file:///android_asset/simpleviewer.html?url=" + path);
-//        }
-        webView.loadUrl("file:///android_asset/simpleviewer.html");
+    public void loadFromFile(File file){
+        if(file != null && file.exists()){
+            webView.loadUrl("file:///android_asset/simpleviewer.html?url=" + file.toURI());
+        }
     }
 
-    public void loadFromUrl(String url){
+    /**
+     * 由于跨域问题,暂时无法实现加载远程pdf
+     */
+    private void loadFromUrl(String url){
         if(url != null){
             webView.loadUrl("file:///android_asset/simpleviewer.html?url=" + url);
         }
