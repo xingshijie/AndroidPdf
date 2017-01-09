@@ -56,15 +56,23 @@ limitations under the License.
       if (!results[2]) return '';
       return decodeURIComponent(results[2].replace(/\+/g, " "));
     }
-
     var documentUrl = getParameterByName('url');
-
-    // Loading document.
-    var DEFAULT_URL = 'http://xingshijie.github.io/doc/testpdf.pdf';
-
-    if(!documentUrl){
-        documentUrl = DEFAULT_URL;
+    function reqListener () {
+      console.dir(JSON.stringify(arguments[0]));
     }
+
+    <!--var request = new XMLHttpRequest();-->
+    <!--request.open("GET", documentUrl, true);-->
+    <!--request.onreadystatechange = function () {-->
+       <!--if (request.readyState === XMLHttpRequest.DONE) {-->
+        <!--if (!request.response || request.status !== 200 && request.status !== 0) {-->
+         <!--console.log("error" + JSON.stringify(request));-->
+        <!--} else {-->
+         <!--console.log("success" + request.response);-->
+        <!--}-->
+       <!--}-->
+      <!--};-->
+    <!--request.send();-->
 
     PDFJS.getDocument(documentUrl).then(function (pdfDocument) {
       // Document loaded, specifying document for the viewer and

@@ -1,7 +1,6 @@
 package com.alo7.android.pdfreader;
 
 import android.content.Context;
-import android.net.Uri;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
@@ -46,10 +45,7 @@ public class PdfView extends FrameLayout {
         }
     }
 
-    /**
-     * 由于跨域问题,暂时无法实现加载远程pdf
-     */
-    private void loadFromUrl(String url){
+    public void loadFromUrl(String url){
         if(url != null){
             webView.loadUrl("file:///android_asset/simpleviewer.html?url=" + url);
         }
