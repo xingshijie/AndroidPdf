@@ -1,3 +1,5 @@
+apply plugin: 'maven-publish'
+apply plugin: 'maven'
 apply plugin: 'com.android.library'
 
 android {
@@ -22,4 +24,44 @@ android {
 
 dependencies {
 
+}
+
+def MAVEN_LOCAL_PATH = 'http://192.168.50.193:8081/nexus/content/repositories/alo7'
+def VERSION_NAME = '1.0.0-SNAPSHOT'
+def GROUP_ID = 'com.alo7.android'
+def ARTIFACT_ID = 'pdfview'
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: MAVEN_LOCAL_PATH) {
+                authentication(userName: "admin", password: "admin123")
+            }
+            pom.project {
+                groupId GROUP_ID
+                artifactId ARTIFACT_ID
+                version VERSION_NAME
+                packaging 'aar'
+            }
+        }
+    }
+}
+
+task androidJavadocs(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+}
+
+task androidJavadocsJar(type: Jar) {
+    classifier = 'javadoc'
+    from androidJavadocs.destinationDir
+}
+
+task androidSourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.java.srcDirs
+}
+
+artifacts {
+    archives androidSourcesJar
+    archives androidJavadocsJar
 }

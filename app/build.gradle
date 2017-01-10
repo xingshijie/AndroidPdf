@@ -21,11 +21,16 @@ android {
 }
 
 dependencies {
+    repositories {
+        jcenter()
+        maven { url "http://192.168.50.193:8081/nexus/content/groups/alo7Android" }
+    }
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:24.2.1'
+//    compile 'com.alo7.android:pdfview:1.0.0-SNAPSHOT'
     testCompile 'junit:junit:4.12'
     compile project(path: ':pdfreader')
 }
