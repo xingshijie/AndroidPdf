@@ -7,7 +7,7 @@ android {
     buildToolsVersion "24.0.3"
 
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 14
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
@@ -27,7 +27,7 @@ dependencies {
 }
 
 def MAVEN_LOCAL_PATH = 'http://192.168.50.193:8081/nexus/content/repositories/alo7'
-def VERSION_NAME = '1.0.0-SNAPSHOT'
+def VERSION_NAME = '1.0.1-SNAPSHOT'
 def GROUP_ID = 'com.alo7.android'
 def ARTIFACT_ID = 'pdfview'
 
