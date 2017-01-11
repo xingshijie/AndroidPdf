@@ -53,4 +53,10 @@ public class PdfView extends FrameLayout {
             webView.loadUrl("file:///android_asset/simpleviewer.html?url=" + url);
         }
     }
+
+    public void loadText(String url){
+        if(url != null){
+            webView.loadUrl("file:///android_asset/textviewer.html?url=" + url);
+        }
+    }
 }

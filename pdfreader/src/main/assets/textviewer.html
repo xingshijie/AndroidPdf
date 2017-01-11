@@ -1,0 +1,41 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script>
+    function getParameterByName(name, url) {
+      if (!url) {
+        url = window.location.href;
+      }
+      name = name.replace(/[\[\]]/g, "\\$&");
+      var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+    var documentUrl = getParameterByName('url');
+    function reqListener () {
+      console.dir(JSON.stringify(arguments[0]));
+    }
+
+    var request = new XMLHttpRequest();
+    request.open("GET", documentUrl, true);
+    //request.responseType = 'arraybuffer';
+    request.onreadystatechange = function () {
+       if (request.readyState === XMLHttpRequest.DONE) {
+        if (!request.response || request.status !== 200 && request.status !== 0) {
+         console.log("error" + JSON.stringify(request));
+        } else {
+        document.getElementById('txt').innerHTML = request.response;
+         //console.log("success" + request.response);
+        }
+       }
+      };
+    request.send();
+  </script>
+</head>
+<body>
+    <pre id= "txt" style="white-space: pre-line;">正在加载中....</pre>
+</body>
+</html>
